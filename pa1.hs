@@ -84,7 +84,8 @@ height (HeapNode p l r) = 1 + (max (height l) (height r))
 
 -- return the heap with a function applied to all Bills in the heap
 heapMap :: (Bill -> Bill) -> Heap Patient -> Heap Patient
-
+heapMap _ Tip = Tip 
+heapMap func (HeapNode (n, p, b) l r) = (HeapNode (n, p, func b) (heapMap func l) (heapMap func r))
 
 size :: Heap Patient -> Int
 size x = length (heap2Names x)
